@@ -1,0 +1,87 @@
+/* Solarized Dark 
+
+For use with Jekyll and Pygments
+
+http://ethanschoonover.com/solarized
+
+SOLARIZED HEX      ROLE
+--------- -------- ------------------------------------------
+base03    #002b36  background
+base01    #586e75  comments / secondary content
+base1     #93a1a1  body text / default code / primary content
+orange    #cb4b16  constants
+red       #dc322f  regex, special keywords
+blue      #268bd2  reserved keywords
+cyan      #2aa198  strings, numbers
+green     #859900  operators, other keywords
+*/
+
+.paste { background-color: #002b36; color: #93a1a1 }
+.paste .c { color: #586e75 } /* Comment */
+.paste .err { color: #93a1a1 } /* Error */
+.paste .g { color: #93a1a1 } /* Generic */
+.paste .k { color: #859900 } /* Keyword */
+.paste .l { color: #93a1a1 } /* Literal */
+.paste .n { color: #93a1a1 } /* Name */
+.paste .o { color: #859900 } /* Operator */
+.paste .x { color: #cb4b16 } /* Other */
+.paste .p { color: #93a1a1 } /* Punctuation */
+.paste .cm { color: #586e75 } /* Comment.Multiline */
+.paste .cp { color: #859900 } /* Comment.Preproc */
+.paste .c1 { color: #586e75 } /* Comment.Single */
+.paste .cs { color: #859900 } /* Comment.Special */
+.paste .gd { color: #2aa198 } /* Generic.Deleted */
+.paste .ge { color: #93a1a1; font-style: italic } /* Generic.Emph */
+.paste .gr { color: #dc322f } /* Generic.Error */
+.paste .gh { color: #cb4b16 } /* Generic.Heading */
+.paste .gi { color: #859900 } /* Generic.Inserted */
+.paste .go { color: #93a1a1 } /* Generic.Output */
+.paste .gp { color: #93a1a1 } /* Generic.Prompt */
+.paste .gs { color: #93a1a1; font-weight: bold } /* Generic.Strong */
+.paste .gu { color: #cb4b16 } /* Generic.Subheading */
+.paste .gt { color: #93a1a1 } /* Generic.Traceback */
+.paste .kc { color: #cb4b16 } /* Keyword.Constant */
+.paste .kd { color: #268bd2 } /* Keyword.Declaration */
+.paste .kn { color: #859900 } /* Keyword.Namespace */
+.paste .kp { color: #859900 } /* Keyword.Pseudo */
+.paste .kr { color: #268bd2 } /* Keyword.Reserved */
+.paste .kt { color: #dc322f } /* Keyword.Type */
+.paste .ld { color: #93a1a1 } /* Literal.Date */
+.paste .m { color: #2aa198 } /* Literal.Number */
+.paste .s { color: #2aa198 } /* Literal.String */
+.paste .na { color: #93a1a1 } /* Name.Attribute */
+.paste .nb { color: #B58900 } /* Name.Builtin */
+.paste .nc { color: #268bd2 } /* Name.Class */
+.paste .no { color: #cb4b16 } /* Name.Constant */
+.paste .nd { color: #268bd2 } /* Name.Decorator */
+.paste .ni { color: #cb4b16 } /* Name.Entity */
+.paste .ne { color: #cb4b16 } /* Name.Exception */
+.paste .nf { color: #268bd2 } /* Name.Function */
+.paste .nl { color: #93a1a1 } /* Name.Label */
+.paste .nn { color: #93a1a1 } /* Name.Namespace */
+.paste .nx { color: #93a1a1 } /* Name.Other */
+.paste .py { color: #93a1a1 } /* Name.Property */
+.paste .nt { color: #268bd2 } /* Name.Tag */
+.paste .nv { color: #268bd2 } /* Name.Variable */
+.paste .ow { color: #859900 } /* Operator.Word */
+.paste .w { color: #93a1a1 } /* Text.Whitespace */
+.paste .mf { color: #2aa198 } /* Literal.Number.Float */
+.paste .mh { color: #2aa198 } /* Literal.Number.Hex */
+.paste .mi { color: #2aa198 } /* Literal.Number.Integer */
+.paste .mo { color: #2aa198 } /* Literal.Number.Oct */
+.paste .sb { color: #586e75 } /* Literal.String.Backtick */
+.paste .sc { color: #2aa198 } /* Literal.String.Char */
+.paste .sd { color: #93a1a1 } /* Literal.String.Doc */
+.paste .s2 { color: #2aa198 } /* Literal.String.Double */
+.paste .se { color: #cb4b16 } /* Literal.String.Escape */
+.paste .sh { color: #93a1a1 } /* Literal.String.Heredoc */
+.paste .si { color: #2aa198 } /* Literal.String.Interpol */
+.paste .sx { color: #2aa198 } /* Literal.String.Other */
+.paste .sr { color: #dc322f } /* Literal.String.Regex */
+.paste .s1 { color: #2aa198 } /* Literal.String.Single */
+.paste .ss { color: #2aa198 } /* Literal.String.Symbol */
+.paste .bp { color: #268bd2 } /* Name.Builtin.Pseudo */
+.paste .vc { color: #268bd2 } /* Name.Variable.Class */
+.paste .vg { color: #268bd2 } /* Name.Variable.Global */
+.paste .vi { color: #268bd2 } /* Name.Variable.Instance */
+.paste .il { color: #2aa198 } /* Literal.Number.Integer.Long */

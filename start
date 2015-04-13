@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+[ -z "$APP" ] && exit 1
+cd /home/sites/$APP
+pkill -F /home/sites/$APP.pid 2>/dev/null
+plackup -s Starman -D -p 12080 ./bin/app.pl --pid /home/sites/$APP.pid

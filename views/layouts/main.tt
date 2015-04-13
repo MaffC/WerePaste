@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+	<head>
+		<title>[% IF paste %][% paste.title || paste.id %] - [% END %]paste.were.space</title>
+		<link rel="stylesheet" href="/reset.css" type="text/css"/>
+		<link rel="stylesheet" href="/style.css" type="text/css"/>
+		<link rel="stylesheet" href="/solarized256.css" type="text/css"/>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id='nav'>
+			<a href="/">new paste</a>[% IF paste %] | <a href="/[% paste.id %]/copy">duplicate paste</a> | <a href="/[% paste.id %]/raw">raw paste data</a>[% END %] | v4: <span id='addr'></span> | v6: <span id='addr6'></span><br />
+			<span id='blurb'><a href="https://github.com/MaffC/WerePaste">App::WerePaste</a>. Abuse of this service will result in the innocent losing out.</span>
+		</div>
+		<br />
+		[% content %]
+		<script type='text/javascript'>var x4=x6=null;function ip(v){var x=new XMLHttpRequest();x.onreadystatechange=rt;x.open('GET','http://ip'+v+'.maff.scot/',true);x.send(null);v==6? x6=x : x4=x;};function rt(){if(x4!=null&&x4.status===200){document.getElementById('addr').textContent=x4.responseText;};if(x6!=null&&x6.status===200){document.getElementById('addr6').textContent=x6.responseText;}};ip(4);ip(6);</script>
+	</body>
+</html>

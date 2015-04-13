@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+body {
+	font-family: 'lucida console', monospace;
+	font-size: 11px;
+	background:#002b36;
+	color: #586e75;
+}
+
+textarea {
+	font-size: 12px;
+	font-family: 'lucida console', monospace;
+	padding: 0;
+	border: none;
+	border-top: 1px solid #335e69;
+	border-bottom: 1px solid #335e69;
+	background:#113c47;
+	color: #93a1a1;
+	width: 100%;
+}
+
+h1 {
+	font-size: 1.4em;
+}
+a, a:hover, a:visited, a:focus {
+	text-decoration: none;
+	color: #ccf;
+}
+.highlighttable {
+	font-size: 12px;
+	line-height: 14px;
+	width: 100%;
+	border-spacing: 0;
+}
+td {
+	border: 2px solid #335e69;
+	padding: 2px 0;
+}
+td.code {
+	width: 100%;
+	border-right: none;
+	border-left: 1px solid #335e69;
+}
+td.linenos {
+	border-left: none;
+	border-right: 1px solid #335e69;
+}
+td.linenos > .linenodiv > pre > a {
+	display: inline-block;
+	padding-top: 2px;
+}
+.highlight > pre > span {
+	display: block;
+	width: 100%;
+	padding-top: 2px;
+}
+.highlight > pre > span:hover {
+	background-color: #113c47;
+}
+.selected {
+	background-color: #335e69;
+}

@@ -1,0 +1,9 @@
+*~
+*.swp
+blib
+Makefile
+Makefile.old
+.build
+*.db
+_Inline
+data/pastes.db

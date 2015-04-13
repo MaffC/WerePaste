@@ -1,0 +1,27 @@
+<h1>[% paste.title %]</h1>
+<span id='dates'>Pasted at <b>[% paste.ts.hms %], [% paste.ts.dmy %]</b>
+[% IF paste.expiration %] | Expires at <b>[% paste.expiration.hms %], [% paste.expiration.dmy %]</b>[% END %] | Language: [% paste.language %]</span>
+<br />
+<br />
+<div class="paste">
+    [% IF paste.html %]
+        [% paste.html %]
+    [% ELSE %]
+        <pre>[% paste.code %]</pre>
+    [% END %]
+</div>
+
+<script type="text/javascript">
+	function highlight_line() {
+		var lnum = window.location.hash.match(/L-\d+/);
+		if(!lnum) { return; }
+		$('.linenos a').removeClass('selected');
+		$('.highlight span').removeClass('selected');
+		$('.linenos a[href="#'+lnum+'"]').addClass('selected');
+		$('.highlight span[id="'+lnum+'"]').addClass('selected');
+	}
+	$(document).ready(function() {
+		window.onhashchange = highlight_line;
+		if(location.hash.indexOf("#L")===0){highlight_line();}
+	});
+</script>

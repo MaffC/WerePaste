@@ -1,0 +1,30 @@
+<form action="/" method="POST">
+	<input type="text" name="title" placeholder="Title (optional)" value="[% paste.title %]" size="40" maxlength="255" />
+	<select class="language" name="lang" style="float: right">
+		<option value="" [% 'selected' UNLESS paste.language %]>Language: Auto</option>
+		<option value="text" [% 'selected' IF paste.language == 'text' %]>Text</option>
+		[% FOR group = settings.languages %]
+			<optgroup label="[% group.keys.0 %]">
+			[% FOR lang = group.values.0 %]
+				[% val = (lang.values.0 || lang.keys.0) | lower %]
+				<option value="[% val | lower %]" [% 'selected' IF paste.language == "${val}" %]>[% lang.keys.0 %]</option>
+			[% END %]
+			</optgroup>
+		[% END %]
+	</select>
+	<br />
+	<textarea name="code" rows="32">[% paste.code %]</textarea>
+	<br />
+	<div style='float: right'>
+		<select class="expiration" name="expiration">
+			<option value="hours:1" >Expire 1 hour from now</option>
+			<option value="hours:6" >Expire 6 hours from now</option>
+			<option value="days:1"  >Expire 1 day from now</option>
+			<option value="weeks:1" >Expire 1 week from now</option>
+			<option value="months:1">Expire 1 month from now</option>
+			<option value="years:1" >Expire 1 year from now</option>
+			<option value="never:1" selected>Never expire</option>
+		</select>
+		<button type="submit">Save</button>
+	</div>
+</form>
