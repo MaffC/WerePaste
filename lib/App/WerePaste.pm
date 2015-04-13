@@ -45,7 +45,7 @@ sub ValidateParams {
 	return undef unless $params->{code};
 	return undef unless $params->{title} =~ /^[a-zA-Z0-9\.\-_ @\(\)]{0,255}$/;
 	return undef unless $params->{lang} =~ /^[a-z0-9\.\-\+# ]{0,40}$/;
-	return undef unless $params->{expiration} =~ /^([a-z]+:[0-9]+)(,[a-z]+:[0-9]+)*$/ or not $params->{expiration};
+	return undef unless $params->{expiration} =~ /^([a-z]+:[0-9]+)(:[a-z]+:[0-9]+)*$/ or not $params->{expiration};
 	return 1;
 }
 sub GetPaste {
