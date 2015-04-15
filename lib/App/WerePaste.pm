@@ -34,7 +34,7 @@ sub GetUUID {
 sub CheckExpired {
 	return unless time > ($lastexpunge+900); #expunge once every 15 mins
 	$lastexpunge = time;
-	schema->resultset('Paste')->search({ expiration => [undef, { '<' => DateTimeToQueryable() }]})->delete_all;
+	schema->resultset('Paste')->search({ expiration => { '<' => DateTimeToQueryable() }})->delete_all;
 }
 sub ValidateParams {
 	my $params = shift;
