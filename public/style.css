@@ -26,33 +26,35 @@ a, a:hover, a:visited, a:focus {
 	text-decoration: none;
 	color: #ccf;
 }
-.highlighttable {
+.highlight {
 	font-size: 12px;
 	line-height: 14px;
 	width: 100%;
-	border-spacing: 0;
 }
-td {
-	border: 2px solid #335e69;
-	padding: 2px 0;
+pre {
+	counter-reset: line-numbering;
+	white-space: pre-wrap;
 }
-td.code {
-	width: 100%;
-	border-right: none;
-	border-left: 1px solid #335e69;
-}
-td.linenos {
-	border-left: none;
-	border-right: 1px solid #335e69;
-}
-td.linenos > .linenodiv > pre > a {
+pre a::before {
+	background-color: #335e69;
+	content: counter(line-numbering);
+	counter-increment: line-numbering;
 	display: inline-block;
-	padding-top: 2px;
+	margin-right: 8px;
+	min-width: 30px;
+	padding: 1px;
+	padding-bottom: none;
+	text-align: right;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 .highlight > pre > span {
 	display: block;
 	width: 100%;
-	padding-top: 2px;
 }
 .highlight > pre > span:hover {
 	background-color: #113c47;
