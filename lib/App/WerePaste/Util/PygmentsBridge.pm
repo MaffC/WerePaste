@@ -15,7 +15,7 @@ from pygments.lexers import guess_lexer, get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 
 def py_highlight(c,l):
-	return highlight(c,l,HtmlFormatter(linenos=True,anchorlinenos=True,lineanchors="L",linenospecial=10,linespans="L",encoding="utf-8"))
+	return highlight(c,l,HtmlFormatter(anchorlinenos=True,lineanchors="L",linespans="L",encoding="utf-8"))
 
 def py_guesslexer(c):
 	return guess_lexer(c,encoding="utf-8")
