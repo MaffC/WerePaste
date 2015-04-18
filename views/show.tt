@@ -15,13 +15,12 @@
 	function highlight_line() {
 		var lnum = window.location.hash.match(/L-\d+/);
 		if(!lnum) { return; }
-		$('.linenos a').removeClass('selected');
 		$('.highlight span').removeClass('selected');
-		$('.linenos a[href="#'+lnum+'"]').addClass('selected');
 		$('.highlight span[id="'+lnum+'"]').addClass('selected');
 	}
 	$(document).ready(function() {
 		window.onhashchange = highlight_line;
 		if(location.hash.indexOf("#L")===0){highlight_line();}
+		$('.highlight a').each(function(i) { $(this).prop('href','#'+$(this).prop('name')); });
 	});
 </script>
