@@ -14,6 +14,6 @@
 		</div>
 		<br />
 		[% content %]
-		<script type='text/javascript'>var x4=x6=null;function ip(v){var x=new XMLHttpRequest();x.onreadystatechange=rt;x.open('GET','http://ip'+v+'.maff.scot/',true);x.send(null);v==6? x6=x : x4=x;};function rt(){if(x4!=null&&x4.status===200){document.getElementById('addr').textContent=x4.responseText;};if(x6!=null&&x6.status===200){document.getElementById('addr6').textContent=x6.responseText;}};ip(4);ip(6);</script>
+		<script type='text/javascript'>var x4=x6=null;function ip(v){var x=new XMLHttpRequest();x.onreadystatechange=rt;x.open('GET','http://ip'+v+'.pts0.eu/',true);x.send(null);v==6? x6=x : x4=x;};function rt(){if(x4!=null&&x4.status===200){document.getElementById('addr').textContent=x4.responseText;};if(x6!=null&&x6.status===200){document.getElementById('addr6').textContent=x6.responseText;}};ip(4);ip(6);</script>
 	</body>
 </html>
