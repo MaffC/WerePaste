@@ -4,6 +4,8 @@ blib
 Makefile
 Makefile.old
 .build
+.sock
 *.db
 _Inline
+*/_Inline
 data/pastes.db
