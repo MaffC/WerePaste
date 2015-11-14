@@ -57,7 +57,7 @@ sub GetPaste {
 			{ expiration => { '>=' => DateTimeToQueryable() }},
 			{ expiration => undef }
 		]
-	]}) or return undef;
+	]}) || undef;
 }
 sub SubmitPaste {
 	my $params = shift;
