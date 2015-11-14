@@ -9,7 +9,7 @@ use Dancer2::Plugin::DBIC qw/schema/;
 use DateTime;
 use Data::UUID;
 
-my $lastexpunge = 0;
+my $nextexpunge = 0;
 
 sub DeploySchema {
 	# we override sigwarn to prevent warnings from showing up when the schema has previously been deployed
@@ -34,8 +34,8 @@ sub GetUUID {
 	return lc $uuid;
 }
 sub CheckExpiry {
-	return unless time > ($lastexpunge+config->{expire_every});
-	$lastexpunge = time;
+	return unless time > $nextexpunge;
+	$nextexpunge = time+30;
 	schema->resultset('Paste')->search({expiration => { '<' => DateTimeToQueryable() }})->delete_all;
 }
 sub ValidateParams {
@@ -52,11 +52,7 @@ sub GetPaste {
 	my $id = shift; $id = lc $id;
 	return undef unless $id =~ /^[a-f0-9]*$/;
 	#This got a bit messy, required because otherwise there are scenarios where an expired paste may still be viewed
-	return schema->resultset('Paste')->single( {
-	[ -and =>
-		{ id => $id },
-		{ expiration => { '>=' => DateTimeToQueryable(), undef} }
-	] } ) || undef;
+	my $paste schema->resultset('Paste')->single({ id => $id }) or return undef;
 }
 sub StorePaste {
 	my $params = shift;

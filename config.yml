@@ -7,9 +7,6 @@ locale: "en_GB"
 logger: "console"
 log: "debug"
 
-# Time in seconds between each paste expiry check
-expire_every: 600
-
 template: "template_toolkit"
 engines:
   template:
