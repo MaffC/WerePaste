@@ -49,7 +49,8 @@ sub ValidateParams {
 	return 1;
 }
 sub GetPaste {
-	my $id = shift; $id = lc $id;
+	my $params = shift;
+	my $id = lc $params->{id};
 	return undef unless $id =~ /^[a-f0-9]*$/;
 	return schema->resultset('Paste')->single({ id => $id });
 }
@@ -77,9 +78,9 @@ hook 'before'    => sub { CheckExpiry(); };
 # Routes
 #get
 get  '/'         => sub { template 'index.tt'; };
-get  '/:id'      => sub { my $paste=GetPaste(scalar params('route')) or pass; template 'show.tt',  { paste => $paste }; };
-get  '/:id/copy' => sub { my $paste=GetPaste(scalar params('route')) or pass; template 'index.tt', { paste => $paste }; };
-get  '/:id/raw'  => sub { my $paste=GetPaste(scalar params('route')) or pass; content_type 'text/plain'; return $paste->code; };
+get  '/:id'      => sub { my $paste=GetPaste(scalar params 'route') or pass; template 'show.tt',  { paste => $paste }; };
+get  '/:id/copy' => sub { my $paste=GetPaste(scalar params 'route') or pass; template 'index.tt', { paste => $paste }; };
+get  '/:id/raw'  => sub { my $paste=GetPaste(scalar params 'route') or pass; content_type 'text/plain'; return $paste->code; };
 #post
 post '/'         => sub {
 	my $p = params 'body';
