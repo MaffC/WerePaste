@@ -53,7 +53,7 @@ sub GetPaste {
 	return undef unless $id =~ /^[a-f0-9]*$/;
 	#This got a bit messy, required because otherwise there are scenarios where an expired paste may still be viewed
 	return schema->resultset('Paste')->single( {
-	-and => [
+	[ -and =>
 		{ id => $id },
 		{ expiration => { '>=' => DateTimeToQueryable() }, expiration => undef }
 	] } ) || undef;
