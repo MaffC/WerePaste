@@ -41,7 +41,7 @@ sub CheckExpiry {
 sub ValidateParams {
 	my $params = shift;
 	return undef unless $params->{code};
-	#TODO: Allow all 'word' characters rather than just a-zA-Z0-9, expanded grammar
+	#TODO: Allow all 'word' characters rather than just a-zA-Z0-9 and limited grammar
 	## Presently this is limited so people can't do anything nasty.
 	return undef unless $params->{title} =~ /^[a-zA-Z0-9\.\-_ @\(\)]{0,255}$/;
 	return undef unless $params->{lang} =~ /^[a-z0-9\.\-\+# ]{0,40}$/;
@@ -52,14 +52,14 @@ sub GetPaste {
 	my $id = shift; $id = lc $id;
 	return undef unless $id =~ /^[a-f0-9]*$/;
 	#This got a bit messy, required because otherwise there are scenarios where an expired paste may still be viewed
-	return schema->resultset('Paste')->single({
+	return schema->resultset('Paste')->single( {
 	-and => [
 		{ id => $id },
 		-or => [
 			{ expiration => { '>=' => DateTimeToQueryable() }},
 			{ expiration => undef }
 		]
-	]}) || undef;
+	] } ) || undef;
 }
 sub StorePaste {
 	my $params = shift;
