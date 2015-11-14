@@ -51,7 +51,7 @@ sub ValidateParams {
 sub GetPaste {
 	my $id = shift; $id = lc $id;
 	return undef unless $id =~ /^[a-f0-9]*$/;
-	return schema->resultset('Paste')->single({ id => $id }) || undef;
+	return schema->resultset('Paste')->single({ id => $id });
 }
 sub StorePaste {
 	my $params = shift;
