@@ -17,7 +17,7 @@
 	<br />
 	<div style='float: right'>
 		<select class="expiration" name="expiration">
-			<option value "" selected>[% strings.default_expiry %] (Default)</option>
+			<option value "" selected   >Two weeks (Default)</option>
 			<option value="hours:1"  >Expire 1 hour from now</option>
 			<option value="hours:6" >Expire 6 hours from now</option>
 			<option value="days:1"    >Expire 1 day from now</option>

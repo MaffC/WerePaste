@@ -32,10 +32,6 @@ plugins:
 expiration:
   weeks: 2
 
-strings:
-  default_expiry: "Two weeks"
-
-
 # Languages supported by Pygments
 # TODO: perhaps swap this out with something in App::WerePaste::Util::PygmentsBridge so we can dynamically load supported languages
 languages:
