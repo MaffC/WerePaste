@@ -24,7 +24,7 @@ sub DateTimeToQueryable {
 }
 sub ExpirationToDate {
 	my $expire = shift;
-	$expire = $expire ? { split ':', $expire } : config->{default_expire};
+	$expire = $expire ? { split ':', $expire } : config->{expiration};
 	return undef if $expire and $expire->{never};
 	return DateTimeToQueryable(%{ $expire });
 }
