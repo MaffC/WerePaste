@@ -13,7 +13,8 @@ my $lastexpunge = 0;
 
 sub DeploySchema {
 	# TODO: figure out how to ensure schema is deployed without producing "table already exists" errors when it is already deployed
-	eval { no warnings; schema->deploy; use warnings; };
+	local $SIG{__WARN__} = sub {};
+	eval { schema->deploy; };
 }
 sub DateTimeToQueryable {
 	my $dt = DateTime->now(time_zone => config->{tz});
@@ -77,6 +78,7 @@ sub SubmitPaste {
 
 # Startup
 DeploySchema();
+warn "this is a warning!";
 # Hooks
 hook 'before'    => sub { CheckExpiry(); };
 # Routes
