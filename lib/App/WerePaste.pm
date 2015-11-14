@@ -12,7 +12,8 @@ use Data::UUID;
 my $lastexpunge = 0;
 
 sub DeploySchema {
-	# TODO: figure out how to ensure schema is deployed without producing "table already exists" errors when it is already deployed
+	# we override sigwarn to prevent warnings from showing up when the schema has previously been deployed
+	# TODO: find a way to mute only the deploy warning here, should any other warnings somehow arise
 	local $SIG{__WARN__} = sub {};
 	eval { schema->deploy; };
 }
@@ -60,7 +61,7 @@ sub GetPaste {
 		]
 	]}) || undef;
 }
-sub SubmitPaste {
+sub StorePaste {
 	my $params = shift;
 	my ($lang,$html) = PygmentsHighlight(lang => $params->{lang}, code => $params->{code});
 	#TODO: maybe figure out a nicer way of doing this, presently the UUID namespace changes with every app start
@@ -78,7 +79,7 @@ sub SubmitPaste {
 
 # Startup
 DeploySchema();
-warn "this is a warning!";
+
 # Hooks
 hook 'before'    => sub { CheckExpiry(); };
 # Routes
@@ -91,7 +92,7 @@ get  '/:id/raw'  => sub { my $paste=GetPaste(scalar params 'route') or pass; con
 post '/'         => sub {
 	my $p = params 'body';
 	ValidateParams($p) or return send_error('Submitted paste is not valid. Check your post title and language, and try again.', 400);
-	my $id = SubmitPaste($p) or return redirect '/503.html';
+	my $id = StorePaste($p) or return redirect '/503.html';
 	return redirect "/$id";
 };
 #default
