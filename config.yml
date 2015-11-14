@@ -7,6 +7,9 @@ locale: "en_GB"
 logger: "console"
 log: "debug"
 
+# Time in seconds between each paste expiry check
+expire_every: 600
+
 template: "template_toolkit"
 engines:
   template:
@@ -24,144 +27,145 @@ plugins:
       options:
         sqlite_unicode: 1
 
-# Comment out for production
-show_errors: 1
+# Uncomment for debugging
+#show_errors: 1
 
 # Sets the expiration for posts
 # Options can be any combination of weeks, days, hours, minutes, seconds
 expiration:
-    weeks: 2
+  weeks: 2
 
 
 # Languages supported by Pygments
+# TODO: perhaps swap this out with something in App::WerePaste::Util::PygmentsBridge so we can dynamically load supported languages
 languages:
-    - Programming languages:
-        - ActionScript:
-        - Ada:
-        - ANTLR:
-        - AppleScript:
-        - Assembly: nasm
-        - Asymptote:
-        - Awk:
-        - Bash:
-        - Befunge:
-        - Boo:
-        - BrainFuck:
-        - C:
-        - C++:
-        - C#:
-        - Clojure:
-        - CoffeeScript:
-        - ColdFusion: cfm
-        - Common Lisp:
-        - Coq:
-        - Cryptol:
-        - Cython:
-        - D:
-        - Dart:
-        - Delphi:
-        - Dylan:
-        - Erlang:
-        - Factor:
-        - Fancy:
-        - Fortran:
-        - F#:
-        - GAP:
-        - Gherkin:
-        - GL shaders:
-        - Groovy:
-        - Haskell:
-        - IDL:
-        - Io:
-        - Java:
-        - JavaScript:
-        - Lasso:
-        - LLVM:
-        - Logtalk:
-        - Lua:
-        - Matlab:
-        - MiniD:
-        - Modelica:
-        - Modula-2:
-        - MuPad:
-        - Nemerle:
-        - Nimrod:
-        - Objective-C:
-        - Objective-J:
-        - Octave:
-        - OCaml:
-        - PHP:
-        - Perl:
-        - PovRay:
-        - PostScript:
-        - PowerShell:
-        - Prolog:
-        - Python:
-        - REBOL:
-        - Red:
-        - Redcode:
-        - Ruby:
-        - Rust:
-        - R:
-        - S:
-        - S-Plus:
-        - Scala:
-        - Scheme:
-        - Scilab:
-        - Smalltalk:
-        - SNOBOL:
-        - Tcl:
-        - Vala:
-        - Verilog:
-        - VHDL:
-        - Visual Basic.NET: vbnet
-        - Visual FoxPro: foxpro
-        - XQuery:
-        - Zephir:
-    - Template Languages:
-        - Cheetah:
-        - Django:
-        - ERB:
-        - Genshi:
-        - Jinja:
-        - JSP:
-        - Mako:
-        - Myghty:
-        - Smarty:
-        - Tea:
-    - Configuration Markup:
-        - ApacheConf:
-        - INI-style: ini
-        - Lighttpd:
-        - Nginx:
-    - Other Markups:
-        - BBCode:
-        - CMake:
-        - CSS:
-        - Debian control file: control
-        - Diff:
-        - DTD:
-        - Gettext Catalogs: pot
-        - Gnuplot:
-        - Groff:
-        - HTML:
-        - HTTP Session: http
-        - IRC log (irssi-format): irc
-        - Makefile:
-        - MoinMoin/Trac wiki markup: moin
-        - MySQL:
-        - POV-Ray Scenes: pov
-        - Ragel:
-        - Redcode:
-        - ReST:
-        - SQL:
-        - PostgreSQL: psql
-        - SQLite:
-        - Squid Configuration: squid
-        - TeX:
-        - tcsh:
-        - VimScript: vim
-        - Windows Batch Script: bat
-        - XML:
-        - XSLT:
-        - YAML:
+  - Programming languages:
+    - ActionScript:
+    - Ada:
+    - ANTLR:
+    - AppleScript:
+    - Assembly: nasm
+    - Asymptote:
+    - Awk:
+    - Bash:
+    - Befunge:
+    - Boo:
+    - BrainFuck:
+    - C:
+    - C++:
+    - C#:
+    - Clojure:
+    - CoffeeScript:
+    - ColdFusion: cfm
+    - Common Lisp:
+    - Coq:
+    - Cryptol:
+    - Cython:
+    - D:
+    - Dart:
+    - Delphi:
+    - Dylan:
+    - Erlang:
+    - Factor:
+    - Fancy:
+    - Fortran:
+    - F#:
+    - GAP:
+    - Gherkin:
+    - GL shaders:
+    - Groovy:
+    - Haskell:
+    - IDL:
+    - Io:
+    - Java:
+    - JavaScript:
+    - Lasso:
+    - LLVM:
+    - Logtalk:
+    - Lua:
+    - Matlab:
+    - MiniD:
+    - Modelica:
+    - Modula-2:
+    - MuPad:
+    - Nemerle:
+    - Nimrod:
+    - Objective-C:
+    - Objective-J:
+    - Octave:
+    - OCaml:
+    - PHP:
+    - Perl:
+    - PovRay:
+    - PostScript:
+    - PowerShell:
+    - Prolog:
+    - Python:
+    - REBOL:
+    - Red:
+    - Redcode:
+    - Ruby:
+    - Rust:
+    - R:
+    - S:
+    - S-Plus:
+    - Scala:
+    - Scheme:
+    - Scilab:
+    - Smalltalk:
+    - SNOBOL:
+    - Tcl:
+    - Vala:
+    - Verilog:
+    - VHDL:
+    - Visual Basic.NET: vbnet
+    - Visual FoxPro: foxpro
+    - XQuery:
+    - Zephir:
+  - Template Languages:
+    - Cheetah:
+    - Django:
+    - ERB:
+    - Genshi:
+    - Jinja:
+    - JSP:
+    - Mako:
+    - Myghty:
+    - Smarty:
+    - Tea:
+  - Configuration Markup:
+    - ApacheConf:
+    - INI-style: ini
+    - Lighttpd:
+    - Nginx:
+  - Other Markups:
+    - BBCode:
+    - CMake:
+    - CSS:
+    - Debian control file: control
+    - Diff:
+    - DTD:
+    - Gettext Catalogs: pot
+    - Gnuplot:
+    - Groff:
+    - HTML:
+    - HTTP Session: http
+    - IRC log (irssi-format): irc
+    - Makefile:
+    - MoinMoin/Trac wiki markup: moin
+    - MySQL:
+    - POV-Ray Scenes: pov
+    - Ragel:
+    - Redcode:
+    - ReST:
+    - SQL:
+    - PostgreSQL: psql
+    - SQLite:
+    - Squid Configuration: squid
+    - TeX:
+    - tcsh:
+    - VimScript: vim
+    - Windows Batch Script: bat
+    - XML:
+    - XSLT:
+    - YAML:
