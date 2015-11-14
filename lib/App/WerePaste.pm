@@ -55,7 +55,7 @@ sub GetPaste {
 	return schema->resultset('Paste')->single( {
 	[ -and =>
 		{ id => $id },
-		{ expiration => { '>=' => DateTimeToQueryable() }, expiration => undef }
+		{ expiration => { '>=' => DateTimeToQueryable(), undef} }
 	] } ) || undef;
 }
 sub StorePaste {
