@@ -13,7 +13,9 @@ my $lastexpunge = 0;
 
 sub DeploySchema {
 	# TODO: figure out how to ensure schema is deployed without producing "table already exists" errors when it is already deployed
+	no warnings;
 	eval {schema->deploy};
+	use warnings;
 }
 sub DateTimeToQueryable {
 	my $dt = DateTime->now(time_zone => config->{tz});
