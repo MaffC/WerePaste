@@ -51,8 +51,7 @@ sub ValidateParams {
 sub GetPaste {
 	my $id = shift; $id = lc $id;
 	return undef unless $id =~ /^[a-f0-9]*$/;
-	#This got a bit messy, required because otherwise there are scenarios where an expired paste may still be viewed
-	my $paste schema->resultset('Paste')->single({ id => $id }) or return undef;
+	return schema->resultset('Paste')->single({ id => $id }) || undef;
 }
 sub StorePaste {
 	my $params = shift;
