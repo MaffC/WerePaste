@@ -25,7 +25,7 @@ plugins:
         sqlite_unicode: 1
 
 # Uncomment for debugging
-show_errors: 1
+#show_errors: 1
 
 # Sets the expiration for posts
 # Options can be any combination of weeks, days, hours, minutes, seconds
