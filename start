@@ -2,4 +2,4 @@
 [ -z "$APP_HOME$APP" ] && exit 1
 cd $APP_HOME/$APP
 pkill -F $APP_HOME/${APP}.pid 2>/dev/null
-plackup -s Starman -D -S $APP_HOME/$APP/.sock ./bin/app.pl --pid $APP_HOME/${APP}.pid
+plackup -s Starman -D -S $APP_HOME/$APP/.sock ./app.psgi --pid $APP_HOME/${APP}.pid
