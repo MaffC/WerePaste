@@ -9,14 +9,15 @@ use Dancer2::Plugin::DBIC qw/schema/;
 use DateTime;
 use Data::UUID;
 
-my $nextexpunge = 0;
-
+# Application startup
 sub DeploySchema {
 	# we override sigwarn to prevent warnings from showing up when the schema has previously been deployed
 	# TODO: find a way to mute only the deploy warning here, should any other warnings somehow arise
 	local $SIG{__WARN__} = sub {};
 	eval { schema->deploy; };
 }
+
+# Data transformation
 sub DateTimeToQueryable {
 	my $dt = DateTime->now(time_zone => config->{tz});
 	$dt->add(@_) if scalar @_;
@@ -28,16 +29,25 @@ sub ExpirationToDate {
 	return undef if $expire and $expire->{never};
 	return DateTimeToQueryable(%{ $expire });
 }
+
+# Data generation
 sub GetUUID {
 	my $uuid = Data::UUID->new->create_str;
 	$uuid =~ s/\-//g;
 	return lc $uuid;
 }
+
+# Data removal
+my $nextexpunge = 0;
 sub CheckExpiry {
 	return unless time > $nextexpunge;
-	$nextexpunge = time+30;
-	schema->resultset('Paste')->search({expiration => { '<' => DateTimeToQueryable() }})->delete_all;
+	$nextexpunge = time+15;
+	schema->resultset('Paste')->search( {
+		expiration => { '<' => DateTimeToQueryable() }
+	} )->delete_all;
 }
+
+# Data validation
 sub ValidateParams {
 	my $params = shift;
 	return undef unless $params->{code};
@@ -48,12 +58,22 @@ sub ValidateParams {
 	return undef unless $params->{expiration} =~ /^([a-z]+:[0-9]+)(:[a-z]+:[0-9]+)*$/ or not $params->{expiration};
 	return 1;
 }
+
+# Data retrieval
 sub GetPaste {
 	my $params = shift;
 	my $id = lc $params->{id};
 	return undef unless $id =~ /^[a-f0-9]*$/;
-	return schema->resultset('Paste')->single({ id => $id });
+	return schema->resultset('Paste')->single( { id => $id } );
 }
+sub PresentPaste {
+	my $params = shift; my $tt = shift;
+	my $paste = GetPaste($params) or return undef;
+	content_type 'text/plain' and return $paste->code unless $tt;
+	return template "$tt.tt", { paste => $paste };
+}
+
+# Data storage
 sub StorePaste {
 	my $params = shift;
 	my ($lang,$html) = PygmentsHighlight(lang => $params->{lang}, code => $params->{code});
@@ -69,26 +89,31 @@ sub StorePaste {
 	}) or return undef;
 	return $id;
 }
+sub ReceivePaste {
+	my $params = shift;
+	return send_error('Submitted paste is not valid. Check your post title and language, and try again.', 400)
+		unless ValidateParams $params;
+	return send_error('Unfortunately, the paste could not be saved.', 503)
+		unless my $id = StorePaste $params;
+	return redirect "/$id";
+}
 
 # Startup
-DeploySchema();
+DeploySchema;
 
 # Hooks
-hook 'before'    => sub { CheckExpiry(); };
+hook 'before'    => sub { CheckExpiry; };
+
 # Routes
-#get
 get  '/'         => sub { template 'index.tt'; };
-get  '/:id'      => sub { my $paste=GetPaste(scalar params 'route') or pass; template 'show.tt',  { paste => $paste }; };
-get  '/:id/copy' => sub { my $paste=GetPaste(scalar params 'route') or pass; template 'index.tt', { paste => $paste }; };
-get  '/:id/raw'  => sub { my $paste=GetPaste(scalar params 'route') or pass; content_type 'text/plain'; return $paste->code; };
+get  '/:id'      => sub { return PresentPaste scalar(params 'route'), 'show'  || pass; };
+get  '/:id/copy' => sub { return PresentPaste scalar(params 'route'), 'index' || pass; };
+get  '/:id/raw'  => sub { return PresentPaste scalar params 'route'           || pass; };
+
 #post
-post '/'         => sub {
-	my $p = params 'body';
-	ValidateParams($p) or return send_error('Submitted paste is not valid. Check your post title and language, and try again.', 400);
-	my $id = StorePaste($p) or return redirect '/503.html';
-	return redirect "/$id";
-};
-#default
+post '/'         => sub { return ReceivePaste scalar params 'body'; };
+
+# Default catch-all route
 any  qr/.*/      => sub { return send_error('What you seek cannot be found here.', 404); };
 
 1;
