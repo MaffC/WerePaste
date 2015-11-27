@@ -10,7 +10,7 @@
 	<body>
 		<div id='nav'>
 			<a href="/">new paste</a>[% IF paste %] | <a href="/[% paste.id %]/copy">duplicate paste</a> | <a href="/[% paste.id %]/raw">raw paste data</a>[% END %] | v4: <span id='addr'></span> | v6: <span id='addr6'></span><br />
-			<span id='blurb'><a href="https://github.com/MaffC/WerePaste">App::WerePaste</a>. Abuse of this service will result in the innocent losing out.</span>
+			<span id='blurb'><a href="https://github.com/Maffsie/WerePaste">App::WerePaste</a>. Abuse of this service will result in the innocent losing out.</span>
 		</div>
 		<br />
 		[% content %]
